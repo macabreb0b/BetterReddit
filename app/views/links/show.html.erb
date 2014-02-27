@@ -1,0 +1,11 @@
+Show Link Page
+
+<%= @link.title %>
+
+<%= @link.url %>
+
+<%= @link.body %>
+<br>
+<% @link.subs.each do |sub| %>
+<%= link_to sub.name, sub_url(sub) %>
+<% end %>

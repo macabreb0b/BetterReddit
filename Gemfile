@@ -35,15 +35,18 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
   gem 'guard-rspec'
   gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', require: 'bcrypt'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -53,3 +56,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'annotate'

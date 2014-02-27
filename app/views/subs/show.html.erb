@@ -1,0 +1,8 @@
+<%= @sub.name %>
+<ul>
+<% @sub.links.each do |link| %>
+  <li><%= link_to link.title, link_url(link) %>
+  <%= link_to link.url, link.url.to_s %>
+  <%= link.body %></li>
+<% end %>
+</ul>
