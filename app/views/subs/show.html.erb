@@ -1,8 +1,11 @@
 <%= @sub.name %>
 <ul>
 <% @sub.links.each do |link| %>
-  <li><%= link_to link.title, link_url(link) %>
-  <%= link_to link.url, link.url.to_s %>
-  <%= link.body %></li>
+  <li>
+    <%= link_to link.title, link_url(link) %>
+    <%= link_to link.url, link.url.to_s %>
+    <%= link.body %>
+    <%= button_to "Remove Link", link_url(link), method: :delete %>
+  </li>
 <% end %>
 </ul>

@@ -1,0 +1,27 @@
+
+<% if current_user.upvoted?(link) %>
+  <% top_action, bottom_action = unvote_link_url(link), downvote_link_url(link) %>
+  <% up_class = 'up' %>
+<% elsif current_user.downvoted?(link) %>
+  <% top_action, bottom_action = upvote_link_url(link), unvote_link_url(link) %>
+  <% down_class = 'down' %>
+<% else %>
+  <% top_action, bottom_action = upvote_link_url(link), downvote_link_url(link) %>
+<% end %>
+
+<div class="arrows link">
+  <form action="<%= top_action %>" method="post">
+    <div class="arrow">
+      <input type="submit" value="<%= like %>" class="<%= up_class %>"/>
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+    </div>
+  </form>
+
+  <div class="score"><%= link.score %></div>
+
+  <form action="<%= bottom_action %>" method="post">
+    <div class="arrow"><input type="submit" value="<%= dislike %>" class="<%= down_class %>"/>
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+    </div>
+  </form>
+</div>

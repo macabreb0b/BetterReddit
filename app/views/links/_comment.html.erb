@@ -1,0 +1,13 @@
+<%= comment.user.username %> said <%= distance_of_time_in_words(Time.now - comment.created_at) %> ago:<br>
+<div class="comment">
+  <%= comment.body %>
+</div>
+<br>
+Reply to <%= comment.user.username %>:
+<%= render 'comment_form', parent_id: comment.id %>
+
+<blockquote>
+  <% comments_by_parent_id[comment.id].each do |child| %>
+    <%= render 'comment', comment: child, comments_by_parent_id: comments_by_parent_id %>
+  <% end %>
+</blockquote>

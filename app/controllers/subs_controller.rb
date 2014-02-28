@@ -18,6 +18,11 @@ class SubsController < ApplicationController
     end
   end
 
+  def index
+    @subs = Sub.all
+    render :index
+  end
+
   def show
     @sub = Sub.find(params[:id])
     render :show

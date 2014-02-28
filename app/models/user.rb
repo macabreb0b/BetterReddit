@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :subs
   has_many :links
   has_many :comments
-
+  has_many :votes
 
   before_validation :set_token
 
@@ -45,6 +45,16 @@ class User < ActiveRecord::Base
     self.token = SecureRandom.urlsafe_base64(16)
     self.save!
     self.token
+  end
+
+  def downvoted?(link)
+    @vote ||= self.votes.find_by_link_id(link.id)
+    @vote && @vote.vote == -1
+  end
+
+  def upvoted?(link)
+    @vote ||= self.votes.find_by_link_id(link.id)
+    @vote && @vote.vote == 1
   end
 
 end

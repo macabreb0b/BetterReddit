@@ -1,11 +1,31 @@
-Show Link Page
-
-<%= @link.title %>
-
-<%= @link.url %>
+<div class="link-title">
+  <%= render 'votes', link: @link %>
+  <div class="link">
+    <h1><%= @link.title %></h1>
+  </div>
+</div>
+<%= link_to @link.url, @link.url %>
+<br>
 
 <%= @link.body %>
 <br>
-<% @link.subs.each do |sub| %>
-<%= link_to sub.name, sub_url(sub) %>
+
+In subs: <% @link.subs.each do |sub| %>
+  <%= link_to sub.name, sub_url(sub) %>
+<% end %>
+<br><br>
+
+<% if current_user.id == @link.user_id %>
+  <%= link_to "Edit Link", edit_link_url(@link) %>
+<% end %>
+<br><br>
+
+
+<h4>Leave a comment:</h4>
+<%= render 'comment_form', parent_id: nil %>
+<br>
+<h2>Comments:</h2>
+<% comments_hash = @link.comments_by_parent_id %>
+<% comments_hash[nil].each do |comment| %>
+  <%= render 'comment', comment: comment, comments_by_parent_id: comments_hash %>
 <% end %>

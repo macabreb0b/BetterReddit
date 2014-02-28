@@ -1,0 +1,9 @@
+<form action="<%= link_comments_url(@link) %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="comment[parent_comment_id]" value="<%= parent_id %>">
+
+  <label type="hidden" for="body" value="reply"></label>
+  <textarea id="body" name="comment[body]"></textarea>
+
+  <br><button>Reply</button>
+</form>

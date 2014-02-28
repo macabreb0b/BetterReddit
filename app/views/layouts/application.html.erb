@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>BetterReddit</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <% if flash[:errors] %>
-    <%= flash[:errors] %>
-  <% end %>
+  <head>
+    <title>BetterReddit</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <% if flash[:errors] %>
+      <%= flash[:errors] %>
+    <% end %>
 
-  <% if logged_in? %>
-    <%= link_to current_user.username, user_url(current_user) %>
-    <%= button_to "Log Out", session_url, method: :delete %>
-  <% else %>
-    <%= link_to "Sign In", new_session_url %>
-    <%= link_to "Sign Up", new_user_url %>
-  <% end %>
+    <% if logged_in? %>
+      <%= link_to current_user.username, user_url(current_user) %>
+      <%= button_to "Log Out", session_url, method: :delete %>
+    <% else %>
+      <%= link_to "Sign In", new_session_url %>
+      <%= link_to "Sign Up", new_user_url %>
+    <% end %>
+    <br>
 
-<%= yield %>
+    <%= link_to "All Subs", subs_url %>
+    <br>
 
-</body>
+    <%= yield %>
+
+  </body>
 </html>

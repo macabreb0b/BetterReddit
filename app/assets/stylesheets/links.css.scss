@@ -1,3 +1,24 @@
 // Place all the styles related to the Links controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.arrow input[type=submit] {
+//  padding:5px 15px;
+  background:#ccc;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
+.arrow input.up {
+  background: #EDB142;
+  color: white;
+}
+
+.arrow input.down {
+  background: #427EED;
+  color: white;
+}

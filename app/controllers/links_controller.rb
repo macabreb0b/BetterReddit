@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
-  before_action :check_if_op, only: [:edit, :update]
+  # before_action :check_logged_in, only: [:create, :check_if_op]
+  before_action :check_if_op, only: [:edit, :update, :destroy]
 
   def create
     @link = current_user.links.new(link_params)
@@ -24,6 +25,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    @comments = @link.comments
     render :show
   end
 
@@ -37,14 +39,22 @@ class LinksController < ApplicationController
     end
   end
 
-  def link_params
-    params.require(:link).permit(:title, :url, :body, sub_ids: [])
+  def destroy
+    @link = Link.find(params[:id])
+    @link.destroy
+    redirect_to :back
   end
 
-  def check_if_op
-    @link =  Link.find(params[:id])
-    unless @link.user_id == current_user.id
-      redirect_to link_url(@link)
+  private
+
+    def link_params
+      params.require(:link).permit(:title, :url, :body, sub_ids: [])
     end
-  end
+
+    def check_if_op
+      @link =  Link.find(params[:id])
+      unless @link.user_id == current_user.id
+        redirect_to link_url(@link)
+      end
+    end
 end
