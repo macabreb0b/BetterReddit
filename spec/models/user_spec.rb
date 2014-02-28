@@ -82,4 +82,5 @@ describe User do
 
   it { should have_many :subs }
   it { should have_many :links }
+  it { should have_many :comments}
 end

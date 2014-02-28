@@ -23,4 +23,21 @@ describe Link do
 
   it { should belong_to :user }
   it { should have_many :link_subs }
+  it { should have_many :comments }
+
+  describe "#comments_by_parent_id" do
+    link = FactoryGirl.create(:link)
+
+    it "returns a hash" do
+      expect(link.comments_by_parent_id).to be_a(Hash)
+    end
+
+    it "returns values as array of comment objects" do
+      expect(link.comments_by_parent_id[nil].first).to be_a(Comment)
+    end
+
+    it "fetches all comments with given parent_id"
+
+
+  end
 end

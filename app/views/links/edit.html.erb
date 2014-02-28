@@ -3,6 +3,8 @@ Edit Link
 <form action="<%= link_url(@link) %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
+  <input type="hidden" name="_method" value="PATCH">
+
   <label>Title:
     <input type="text" name="link[title]" value="<%= @link.title %>">
   </label>
@@ -13,13 +15,17 @@ Edit Link
     <input type="text" name="link[body]" value="<%= @link.body %>">
   </label>
 
-  <>
+  <input type="hidden" name="link[sub_ids][]" value="">
+
+
   <% Sub.all.each do |sub| %>
   <label>
-    <input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>">
+    <input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>"
+    <%= "checked" if @link.subs.pluck(:id).include?(sub.id) %>>
+
     <%= sub.name %>
   </label>
   <% end %>
 
-  <button>Create New Link</button>
+  <button>Update Link</button>
 </form>

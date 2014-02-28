@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   has_many :subs
   has_many :links
+  has_many :comments
 
 
   before_validation :set_token

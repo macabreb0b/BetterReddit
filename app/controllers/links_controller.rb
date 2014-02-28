@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  before_action :check_if_op, only: [:edit, :update]
+
   def create
     @link = current_user.links.new(link_params)
 
@@ -11,6 +13,8 @@ class LinksController < ApplicationController
   end
 
   def edit
+    @link = Link.find(params[:id])
+    render :edit
   end
 
   def new
@@ -24,9 +28,23 @@ class LinksController < ApplicationController
   end
 
   def update
+    @link = Link.find(params[:id])
+    if @link.update_attributes(link_params)
+      redirect_to link_url(@link)
+    else
+      flash.now[:errors] = @link.errors.full_messages
+      render :edit
+    end
   end
 
   def link_params
     params.require(:link).permit(:title, :url, :body, sub_ids: [])
+  end
+
+  def check_if_op
+    @link =  Link.find(params[:id])
+    unless @link.user_id == current_user.id
+      redirect_to link_url(@link)
+    end
   end
 end
